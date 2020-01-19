@@ -16,6 +16,6 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Assembly
-      run: ./gradlew assemble
+      run: ./gradlew assembleProdRelease
     - name: Upload
       run: find .
