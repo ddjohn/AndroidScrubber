@@ -18,4 +18,4 @@ jobs:
     - name: Assembly
       run: ./gradlew assemble
     - name: Upload
-      run: find .
+      run: find ..
