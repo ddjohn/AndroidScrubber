@@ -11,6 +11,11 @@ public class Debug {
         DebugFragment.log(tag + ":\n" + msg + "\n");
     }
 
+    public static void e(String tag, String msg, Exception e) {
+        Log.e(TAG + ":" + tag, msg, e);
+        DebugFragment.log(tag + ":\n" + msg + "\n" + e + "\n");
+    }
+
     public static void w(String tag, String msg) {
         Log.w(TAG + ":" + tag, msg);
         DebugFragment.log(tag + ":\n" + msg + "\n");
