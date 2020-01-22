@@ -19,6 +19,7 @@ import se.avelon.daidalos.fragments.MapFragment;
 import se.avelon.daidalos.fragments.NavigationFragment;
 import se.avelon.daidalos.fragments.SensorFragment;
 import se.avelon.daidalos.fragments.ScreenFragment;
+import se.avelon.daidalos.fragments.TextFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private AbstractFragment[] fragments= {
@@ -33,6 +34,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             new MediaFragment(),
             new NavigationFragment(),
             new SensorFragment(),
+            new TextFragment(),
     };
 
     public PagerAdapter(Activity activity, FragmentManager fm) {
