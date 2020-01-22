@@ -21,15 +21,12 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import java.io.IOException;
 import java.util.Arrays;
-
 import se.avelon.daidalos.Debug;
 import se.avelon.daidalos.R;
 
-public class CameraFragment extends AbstractFragment implements SurfaceHolder.Callback {
+public class CameraFragment extends AbstractFragment {
     private static final String TAG = CameraFragment.class.getSimpleName();
-    private Camera camera;
 
     public String getTitle() {return "Camera";};
     public int getIcon() {return R.drawable.camera;};
@@ -126,39 +123,4 @@ public class CameraFragment extends AbstractFragment implements SurfaceHolder.Ca
             Debug.e(TAG, "Camera permissions where not granted");
         }
     }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        try {
-            Debug.d(TAG, "Surface created");
-
-            camera.setPreviewDisplay(holder);
-            camera.startPreview();
-        }
-        catch(IOException e) {}
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-        if (holder.getSurface() == null){
-            return;
-        }
-
-        try {
-            camera.stopPreview();
-        }
-        catch(Exception e) {}
-
-        try {
-            camera.setPreviewDisplay(holder);
-            camera.startPreview();
-
-        } catch(Exception e) {
-
-        }
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {}
 }
