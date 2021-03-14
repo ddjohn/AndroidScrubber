@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments;
 
 import android.content.Intent;
@@ -6,12 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.Locale;
-
 import se.avelon.androidscrubber.R;
 
-public class TextFragment extends AbstractFragment implements android.speech.tts.TextToSpeech.OnInitListener {
+public class TextFragment extends AbstractFragment
+        implements android.speech.tts.TextToSpeech.OnInitListener {
     private static final String TAG = TextFragment.class.getSimpleName();
 
     private android.speech.tts.TextToSpeech tts = null;
@@ -25,7 +25,8 @@ public class TextFragment extends AbstractFragment implements android.speech.tts
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.cellular, container, false);
     }
 
@@ -70,6 +71,9 @@ public class TextFragment extends AbstractFragment implements android.speech.tts
         Log.e(TAG, "res=" + res);
 
         // tts.speak("Dimitrios, what time is it?", TextFragment.QUEUE_ADD, null);
-        tts.speak("Magnus, see you at the airport!!", android.speech.tts.TextToSpeech.QUEUE_ADD, null);
+        tts.speak(
+                "Magnus, see you at the airport!!",
+                android.speech.tts.TextToSpeech.QUEUE_ADD,
+                null);
     }
 }

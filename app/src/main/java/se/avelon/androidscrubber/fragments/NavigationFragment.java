@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments;
 
 import android.Manifest;
@@ -13,15 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import androidx.core.app.ActivityCompat;
-
 import java.util.Date;
-
 import se.avelon.androidscrubber.Debug;
 import se.avelon.androidscrubber.R;
 
-public class NavigationFragment extends AbstractFragment implements LocationListener, OnNmeaMessageListener {
+public class NavigationFragment extends AbstractFragment
+        implements LocationListener, OnNmeaMessageListener {
     private static final String TAG = NavigationFragment.class.getSimpleName();
 
     private LocationManager manager;
@@ -36,11 +35,17 @@ public class NavigationFragment extends AbstractFragment implements LocationList
     private EditText time;
     private EditText status;
 
-    public String getTitle() {return "Navigation";};
-    public int getIcon() {return R.drawable.navigation;};
+    public String getTitle() {
+        return "Navigation";
+    };
+
+    public int getIcon() {
+        return R.drawable.navigation;
+    };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.navigation, container, false);
     }
 
@@ -48,34 +53,39 @@ public class NavigationFragment extends AbstractFragment implements LocationList
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.manager = (LocationManager)this.getActivity().getSystemService(Context.LOCATION_SERVICE);
+        this.manager =
+                (LocationManager) this.getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-        if(     ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                                this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(
+                                this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
 
             Debug.i(TAG, "Register for GPS");
             manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
             Debug.i(TAG, "Register for NMEA");
             manager.addNmeaListener(this);
-//            manager.registerGnssMeasurementsCallback(new GnssMeasurements.Callback() {});
-            manager.registerGnssStatusCallback(new GnssStatus.Callback() {
+            //            manager.registerGnssMeasurementsCallback(new GnssMeasurements.Callback()
+            // {});
+            manager.registerGnssStatusCallback(new GnssStatus.Callback() {});
 
-            });
-//            manager.registerGnssNavigationMessageCallback(new GnssNavgationMessage.Callback() {});
-        }
-        else {
+            //            manager.registerGnssNavigationMessageCallback(new
+            // GnssNavgationMessage.Callback() {});
+        } else {
             Debug.e(TAG, "Navigations permissions where not granted");
         }
 
-        latitude = (EditText)view.findViewById(R.id.navLatitude);
-        longitude = (EditText)view.findViewById(R.id.navLongitude);
-        altitude = (EditText)view.findViewById(R.id.navAltitude);
-        accuracy = (EditText)view.findViewById(R.id.navAccuracy);
-        bearing = (EditText)view.findViewById(R.id.navBearing);
-        realtime = (EditText)view.findViewById(R.id.navRealTime);
-        speed = (EditText)view.findViewById(R.id.navSpeed);
-        time = (EditText)view.findViewById(R.id.navTime);
-        status = (EditText)view.findViewById(R.id.navStatus);
+        latitude = (EditText) view.findViewById(R.id.navLatitude);
+        longitude = (EditText) view.findViewById(R.id.navLongitude);
+        altitude = (EditText) view.findViewById(R.id.navAltitude);
+        accuracy = (EditText) view.findViewById(R.id.navAccuracy);
+        bearing = (EditText) view.findViewById(R.id.navBearing);
+        realtime = (EditText) view.findViewById(R.id.navRealTime);
+        speed = (EditText) view.findViewById(R.id.navSpeed);
+        time = (EditText) view.findViewById(R.id.navTime);
+        status = (EditText) view.findViewById(R.id.navStatus);
     }
 
     @Override
@@ -93,7 +103,12 @@ public class NavigationFragment extends AbstractFragment implements LocationList
         accuracy.setText("Accuracy: " + location.getAccuracy());
         bearing.setText("Bearing: " + location.getBearing());
         realtime.setText("Realtime: " + location.getElapsedRealtimeNanos());
-        speed.setText("Speed: " + location.getSpeed() + " mph (" + location.getSpeed()*1.609344 + " km/h)");
+        speed.setText(
+                "Speed: "
+                        + location.getSpeed()
+                        + " mph ("
+                        + location.getSpeed() * 1.609344
+                        + " km/h)");
         time.setText("Time: " + new Date(location.getTime()));
     }
 

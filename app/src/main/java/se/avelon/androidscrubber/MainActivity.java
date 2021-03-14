@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber;
 
 import android.Manifest;
@@ -5,9 +6,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -23,56 +24,59 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         this.setContentView(R.layout.activity_main);
-        this.setSupportActionBar((Toolbar)this.findViewById(R.id.toolbar));
+        this.setSupportActionBar((Toolbar) this.findViewById(R.id.toolbar));
 
         /*
-        new Thread() {
-            public void run() {
-                ExtractDecodeEditEncodeMuxTest test = new ExtractDecodeEditEncodeMuxTest();
-                test.setContext(MainActivity.this);
-                try {
-                    test.testExtractDecodeEditEncodeMuxAudioVideo();
-                } catch (Throwable t) {
-                    t.printStackTrace();
-                }
-            }
-        }.start();
+                new Thread() {
+                    public void run() {
+                        ExtractDecodeEditEncodeMuxTest test = new ExtractDecodeEditEncodeMuxTest();
+                        test.setContext(MainActivity.this);
+                        try {
+                            test.testExtractDecodeEditEncodeMuxAudioVideo();
+                        } catch (Throwable t) {
+                            t.printStackTrace();
+                        }
+                    }
+                }.start();
 
-        if(true) return;
-*/
+                if(true) return;
+        */
         ((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).vibrate(50);
 
+        /*
+                Window window = this.getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-/*
-        Window window = this.getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-
-        WindowManager.LayoutParams params;
-        params.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
-        params.screenBrightness = 0;
-        getWindow().setAttributes(params);
-*/
+                WindowManager.LayoutParams params;
+                params.flags |= WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
+                params.screenBrightness = 0;
+                getWindow().setAttributes(params);
+        */
 
         Debug.d(TAG, "Request permissions");
-        ActivityCompat.requestPermissions(this,
-                new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.VIBRATE,
-                        Manifest.permission_group.MICROPHONE,
-                        Manifest.permission_group.STORAGE,
+        ActivityCompat.requestPermissions(
+                this,
+                new String[] {
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.VIBRATE,
+                    Manifest.permission_group.MICROPHONE,
+                    Manifest.permission_group.STORAGE,
                 },
                 7);
 
         FloatingActionButton fab = (FloatingActionButton) this.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Cleared your log", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                DebugFragment.clear();
-            }
-        });
+        fab.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Snackbar.make(view, "Cleared your log", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null)
+                                .show();
+                        DebugFragment.clear();
+                    }
+                });
 
         final PagerAdapter adapter = new PagerAdapter(this, this.getSupportFragmentManager());
     }
@@ -95,18 +99,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(
+            int requestCode, String permissions[], int[] grantResults) {
         Debug.d(TAG, "Results from permission request");
         switch (requestCode) {
-            case 7: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Debug.d(TAG, "Got my permissions granted");
+            case 7:
+                {
+                    if (grantResults.length > 0
+                            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        Debug.d(TAG, "Got my permissions granted");
 
-                } else {
-                    Debug.e(TAG, "User did not approve the permissions");
+                    } else {
+                        Debug.e(TAG, "User did not approve the permissions");
+                    }
+                    return;
                 }
-                return;
-            }
         }
     }
 }

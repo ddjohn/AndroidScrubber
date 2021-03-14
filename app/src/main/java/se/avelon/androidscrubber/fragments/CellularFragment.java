@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments;
 
 import android.content.Intent;
@@ -6,7 +7,6 @@ import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import se.avelon.androidscrubber.R;
 
 public class CellularFragment extends AbstractFragment {
@@ -23,7 +23,8 @@ public class CellularFragment extends AbstractFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.cellular, container, false);
     }
 
@@ -32,7 +33,5 @@ public class CellularFragment extends AbstractFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void onActivityResult(int request, int result, Intent data) {
-    }
-
+    public void onActivityResult(int request, int result, Intent data) {}
 }

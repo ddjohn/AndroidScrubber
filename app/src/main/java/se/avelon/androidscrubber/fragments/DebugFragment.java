@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments;
 
 import android.os.Bundle;
@@ -6,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import se.avelon.androidscrubber.R;
 
 public class DebugFragment extends AbstractFragment {
@@ -15,11 +15,17 @@ public class DebugFragment extends AbstractFragment {
     private static TextView text = null;
     private static ScrollView scrollView = null;
 
-    public String getTitle() {return "Debug";};
-    public int getIcon() {return R.drawable.debug;};
+    public String getTitle() {
+        return "Debug";
+    };
+
+    public int getIcon() {
+        return R.drawable.debug;
+    };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.debug, container, false);
     }
 
@@ -27,8 +33,8 @@ public class DebugFragment extends AbstractFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        DebugFragment.text = (TextView)view.findViewById(R.id.debugView);
-        DebugFragment.scrollView = (ScrollView)view.findViewById(R.id.debugScroll);
+        DebugFragment.text = (TextView) view.findViewById(R.id.debugView);
+        DebugFragment.scrollView = (ScrollView) view.findViewById(R.id.debugScroll);
 
         DebugFragment.log("");
         DebugFragment.log("");
@@ -41,14 +47,15 @@ public class DebugFragment extends AbstractFragment {
     }
 
     public static void log(String msg) {
-        if(text != null) {
+        if (text != null) {
             text.append(msg + "\n");
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN);;
+            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            ;
         }
     }
 
     public static void clear() {
-        if(text != null) {
+        if (text != null) {
             text.setText("");
         }
     }

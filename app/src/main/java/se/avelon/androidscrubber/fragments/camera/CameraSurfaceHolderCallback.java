@@ -1,12 +1,11 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments.camera;
 
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CaptureRequest;
 import android.view.SurfaceHolder;
-
 import java.util.Arrays;
-
 import se.avelon.androidscrubber.Debug;
 
 public class CameraSurfaceHolderCallback implements SurfaceHolder.Callback {
@@ -22,12 +21,15 @@ public class CameraSurfaceHolderCallback implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
         try {
             Debug.w(TAG, "opening camera...");
-            final CaptureRequest.Builder builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+            final CaptureRequest.Builder builder =
+                    device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
             builder.addTarget(holder.getSurface());
 
-            device.createCaptureSession(Arrays.asList(holder.getSurface()), new CameraCaptureSessionCallback(device, holder.getSurface()), null);
-        }
-        catch(CameraAccessException e) {
+            device.createCaptureSession(
+                    Arrays.asList(holder.getSurface()),
+                    new CameraCaptureSessionCallback(device, holder.getSurface()),
+                    null);
+        } catch (CameraAccessException e) {
             Debug.e(TAG, "exception", e);
         }
     }

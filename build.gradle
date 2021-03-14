@@ -43,9 +43,9 @@ spotless {
     java {
         target '*/src/*/java/**/*.java'
 
-        toggleOffOn()
+        //toggleOffOn()
 
-        importOrder()
+        //importOrder()
         removeUnusedImports()
         indentWithSpaces()
         trimTrailingWhitespace()

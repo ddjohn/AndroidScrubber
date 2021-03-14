@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments;
 
 import se.avelon.androidscrubber.R;
@@ -11,10 +12,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 */
 public class MapFragment extends AbstractFragment {
 
-    public String getTitle() {return "Map";};
-    public int getIcon() {return R.drawable.map;};
+    public String getTitle() {
+        return "Map";
+    };
 
-
+    public int getIcon() {
+        return R.drawable.map;
+    };
 };
 /*
 public class MapFragment extends Fragment implements OnMapReadyCallback {

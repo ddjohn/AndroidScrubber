@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments.camera;
 
 import android.hardware.camera2.CameraAccessException;
@@ -8,9 +9,7 @@ import android.hardware.camera2.CaptureRequest;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.view.Surface;
-
 import androidx.annotation.NonNull;
-
 import se.avelon.androidscrubber.Debug;
 
 public class CameraCaptureSessionCallback extends CameraCaptureSession.StateCallback {
@@ -21,8 +20,7 @@ public class CameraCaptureSessionCallback extends CameraCaptureSession.StateCall
         Debug.w(TAG, "opening camera...");
         try {
             builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-        }
-        catch(CameraAccessException e) {
+        } catch (CameraAccessException e) {
             Debug.e(TAG, "exception", e);
         }
 
@@ -40,8 +38,7 @@ public class CameraCaptureSessionCallback extends CameraCaptureSession.StateCall
             Handler handler = new Handler(thread.getLooper());
 
             session.setRepeatingRequest(builder.build(), null, handler);
-        }
-        catch (CameraAccessException e) {
+        } catch (CameraAccessException e) {
             e.printStackTrace();
         }
     }

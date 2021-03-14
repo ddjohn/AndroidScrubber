@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments;
 
 import android.bluetooth.BluetoothAdapter;
@@ -8,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 import java.util.Set;
-
 import se.avelon.androidscrubber.Debug;
 import se.avelon.androidscrubber.R;
 import se.avelon.androidscrubber.Utilities;
@@ -19,11 +18,17 @@ import se.avelon.androidscrubber.Utilities;
 public class BluetoothFragment extends AbstractFragment {
     private static final String TAG = BluetoothFragment.class.getSimpleName();
 
-    public String getTitle() {return "Bluetooth";};
-    public int getIcon() {return R.drawable.bluetooth;};
+    public String getTitle() {
+        return "Bluetooth";
+    };
+
+    public int getIcon() {
+        return R.drawable.bluetooth;
+    };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.bluetooth, container, false);
     }
 
@@ -33,17 +38,17 @@ public class BluetoothFragment extends AbstractFragment {
 
         BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
 
-        ((EditText)view.findViewById(R.id.enabled)).setText("Enabled: " + bluetooth.isEnabled());
-        ((EditText)view.findViewById(R.id.address)).setText("Enabled: " + bluetooth.getAddress());
-        ((EditText)view.findViewById(R.id.name)).setText("Name: " + bluetooth.getName());
-        ((EditText)view.findViewById(R.id.state)).setText("State: " + bluetooth.getState());
+        ((EditText) view.findViewById(R.id.enabled)).setText("Enabled: " + bluetooth.isEnabled());
+        ((EditText) view.findViewById(R.id.address)).setText("Enabled: " + bluetooth.getAddress());
+        ((EditText) view.findViewById(R.id.name)).setText("Name: " + bluetooth.getName());
+        ((EditText) view.findViewById(R.id.state)).setText("State: " + bluetooth.getState());
 
         ArrayList list = new ArrayList();
         list.add("Bluetooth Devices:");
 
         Set<BluetoothDevice> pairedDevices = bluetooth.getBondedDevices();
         for (BluetoothDevice device : pairedDevices) {
-            list.add("name=" + device.getName() +",address=" + device.getAddress());
+            list.add("name=" + device.getName() + ",address=" + device.getAddress());
         }
         Utilities.spinner(view, R.id.devices, list);
 

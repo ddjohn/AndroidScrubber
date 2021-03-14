@@ -1,12 +1,11 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments.camera;
 
 import android.hardware.camera2.CameraDevice;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
-
 import androidx.annotation.NonNull;
-
 import se.avelon.androidscrubber.Debug;
 
 public class CameraDeviceCallback extends CameraDevice.StateCallback {
@@ -34,5 +33,4 @@ public class CameraDeviceCallback extends CameraDevice.StateCallback {
 
     @Override
     public void onError(@NonNull CameraDevice camera, int error) {}
-
 }

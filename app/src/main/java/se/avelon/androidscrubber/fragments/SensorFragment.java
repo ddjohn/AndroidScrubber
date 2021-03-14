@@ -1,3 +1,4 @@
+/* (C) 2021 ddjohn@gmail.com */
 package se.avelon.androidscrubber.fragments;
 
 import android.content.Context;
@@ -13,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 import java.util.List;
 import se.avelon.androidscrubber.Debug;
@@ -28,11 +28,17 @@ public class SensorFragment extends AbstractFragment implements SensorEventListe
     private EditText rotation;
     private EditText steps;
 
-    public String getTitle() {return "Sensor";};
-    public int getIcon() {return R.drawable.sensor;};
+    public String getTitle() {
+        return "Sensor";
+    };
+
+    public int getIcon() {
+        return R.drawable.sensor;
+    };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.sensor, container, false);
     }
 
@@ -40,12 +46,13 @@ public class SensorFragment extends AbstractFragment implements SensorEventListe
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SensorManager manager = (SensorManager)this.getActivity().getSystemService(Context.SENSOR_SERVICE);
+        SensorManager manager =
+                (SensorManager) this.getActivity().getSystemService(Context.SENSOR_SERVICE);
 
-        List<Sensor> sensorList  = manager.getSensorList(Sensor.TYPE_ALL);
+        List<Sensor> sensorList = manager.getSensorList(Sensor.TYPE_ALL);
         ArrayList list = new ArrayList();
         list.add("Sensors:");
-        for (Sensor currentSensor : sensorList ) {
+        for (Sensor currentSensor : sensorList) {
             Log.i(TAG, "sensor=" + currentSensor.getName());
             list.add(currentSensor.getName());
         }
@@ -58,29 +65,31 @@ public class SensorFragment extends AbstractFragment implements SensorEventListe
         Sensor stepsSensor = manager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         Sensor detectorSensor = manager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 
-        manager.registerListener(this,      gravitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+        manager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_NORMAL);
         manager.registerListener(this, accelerationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        manager.registerListener(this,     rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        manager.registerListener(this,        stepsSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        manager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        manager.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-        manager.requestTriggerSensor(new TriggerEventListener() {
-            @Override
-            public void onTrigger(TriggerEvent event) {
-                Log.e(TAG, "mungo=" + event);
-            }
-        }, gravitySensor);
+        manager.requestTriggerSensor(
+                new TriggerEventListener() {
+                    @Override
+                    public void onTrigger(TriggerEvent event) {
+                        Log.e(TAG, "mungo=" + event);
+                    }
+                },
+                gravitySensor);
 
-        gravity = (EditText)view.findViewById(R.id.sensorGravity);
-        accelerometer = (EditText)view.findViewById(R.id.sensorAccelerometer);
-        rotation = (EditText)view.findViewById(R.id.sensorRotation);
-        steps = (EditText)view.findViewById(R.id.sensorSteps);
+        gravity = (EditText) view.findViewById(R.id.sensorGravity);
+        accelerometer = (EditText) view.findViewById(R.id.sensorAccelerometer);
+        rotation = (EditText) view.findViewById(R.id.sensorRotation);
+        steps = (EditText) view.findViewById(R.id.sensorSteps);
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         Debug.i(TAG, "" + event.sensor);
 
-        switch(event.sensor.getType()) {
+        switch (event.sensor.getType()) {
             case Sensor.TYPE_GRAVITY:
                 gravity.setText("Gravity: " + Utilities.float2String(event.values));
                 break;
@@ -93,7 +102,6 @@ public class SensorFragment extends AbstractFragment implements SensorEventListe
             case Sensor.TYPE_STEP_COUNTER:
                 steps.setText("Steps: " + Utilities.float2String(event.values));
                 break;
-
         }
     }
 
