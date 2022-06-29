@@ -22,26 +22,26 @@ import se.avelon.androidscrubber.fragments.SensorFragment;
 import se.avelon.androidscrubber.fragments.TextFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    private AbstractFragment[] fragments = {
-        new DebugFragment(),
-        new ScreenFragment(),
-        new AudioFragment(),
-        new BatteryFragment(),
-        new BluetoothFragment(),
-        new CameraFragment(),
-        new CellularFragment(),
-        new MapFragment(),
-        new MediaFragment(),
-        new NavigationFragment(),
-        new SensorFragment(),
-        new TextFragment(),
+    private static final AbstractFragment[] FRAGMENTS = {
+            new DebugFragment(),
+            new AudioFragment(),
+            new BatteryFragment(),
+            new BluetoothFragment(),
+            new CameraFragment(),
+            new CellularFragment(),
+            new MapFragment(),
+            new MediaFragment(),
+            new NavigationFragment(),
+            new ScreenFragment(),
+            new SensorFragment(),
+            new TextFragment(),
     };
 
     public PagerAdapter(Activity activity, FragmentManager fm) {
         super(fm);
 
         TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.tab_layout);
-        for (AbstractFragment fragment : fragments) {
+        for (AbstractFragment fragment : FRAGMENTS) {
             TabLayout.Tab tab = tabLayout.newTab();
             tab.setIcon(fragment.getIcon());
             // tab.setText(fragment.getTitle());
@@ -58,6 +58,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
                         viewPager.setCurrentItem(tab.getPosition());
+                        activity.setTitle("Scrubber - " + FRAGMENTS[tab.getPosition()].getTitle());
                     }
 
                     @Override
@@ -70,11 +71,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return fragments[position];
+        return FRAGMENTS[position];
     }
 
     @Override
     public int getCount() {
-        return fragments.length;
+        return FRAGMENTS.length;
     }
 }

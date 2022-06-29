@@ -9,6 +9,8 @@ import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -18,6 +20,16 @@ import se.avelon.androidscrubber.fragments.DebugFragment;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private static final String[] REQUEST_PERMISSIONS = new String[] {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA,
+            Manifest.permission.VIBRATE,
+            Manifest.permission_group.MICROPHONE,
+            Manifest.permission_group.STORAGE,
+    };
+    private static final int REQUEST_CODE = 666;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +66,7 @@ public class MainActivity extends AppCompatActivity {
         */
 
         Debug.d(TAG, "Request permissions");
-        ActivityCompat.requestPermissions(
-                this,
-                new String[] {
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.VIBRATE,
-                    Manifest.permission_group.MICROPHONE,
-                    Manifest.permission_group.STORAGE,
-                },
-                7);
+        this.requestPermissions(REQUEST_PERMISSIONS, REQUEST_CODE);
 
         FloatingActionButton fab = (FloatingActionButton) this.findViewById(R.id.fab);
         fab.setOnClickListener(
@@ -100,20 +102,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(
-            int requestCode, String permissions[], int[] grantResults) {
+            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Debug.d(TAG, "Results from permission request");
-        switch (requestCode) {
-            case 7:
-                {
-                    if (grantResults.length > 0
-                            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                        Debug.d(TAG, "Got my permissions granted");
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-                    } else {
-                        Debug.e(TAG, "User did not approve the permissions");
-                    }
-                    return;
+        switch (requestCode) {
+            case REQUEST_CODE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Debug.d(TAG, "Got my permissions granted");
+
+                } else {
+                    Debug.e(TAG, "User did not approve the permissions");
                 }
+            }
         }
     }
 }

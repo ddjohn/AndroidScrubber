@@ -17,7 +17,7 @@ public class AudioFragment extends AbstractFragment {
     private static final String TAG = AudioFragment.class.getSimpleName();
 
     public String getTitle() {
-        return "Battery";
+        return "Audio";
     };
 
     public int getIcon() {
