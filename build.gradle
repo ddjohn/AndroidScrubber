@@ -1,30 +1,25 @@
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.2"
+        classpath 'com.android.tools.build:gradle:7.2.1'
         classpath "com.diffplug.spotless:spotless-plugin-gradle:5.11.0"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
 apply plugin: "java"
 apply plugin: "com.diffplug.spotless"
-sourceCompatibility = 1.8
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 /*
@@ -55,4 +50,9 @@ spotless {
         googleJavaFormat().aosp()
         //prettier()
     }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }

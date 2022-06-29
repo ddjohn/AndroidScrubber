@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidScrubber.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidScrubber.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidScrubber.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidScrubber.app.iml" />
-    </modules>
-  </component>
-</project>
