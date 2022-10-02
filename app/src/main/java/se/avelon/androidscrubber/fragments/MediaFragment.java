@@ -31,7 +31,7 @@ public class MediaFragment extends AbstractFragment {
     private MediaCodec encoder;
 
     public String getTitle() {
-        return "Medida";
+        return "Media";
     };
 
     public int getIcon() {

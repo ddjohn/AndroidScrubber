@@ -37,7 +37,7 @@ public class TextFragment extends AbstractFragment
         Intent intent = new Intent();
         intent.setAction(android.speech.tts.TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         this.startActivityForResult(intent, 8);
-        Log.e(TAG, "inetnt");
+        Log.e(TAG, "intent");
     }
 
     public void onActivityResult(int request, int result, Intent data) {
